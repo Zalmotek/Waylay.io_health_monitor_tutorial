@@ -23,11 +23,11 @@ json_data = None
 DataMap = None
 
 wifiCfg.autoConnect(lcdShow=True)
-HeartRate = M5Label('Heart', x=21, y=129, color=0x509ed3, font=FONT_MONT_30, parent=None)
+HeartRate = M5Label('Heart', x=15, y=129, color=0x509ed3, font=FONT_MONT_30, parent=None)
 sp = M5Label('SPO2', x=129, y=129, color=0x509ed3, font=FONT_MONT_30, parent=None)
-temperature_label = M5Label('TEM', x=239, y=129, color=0x509ed3, font=FONT_MONT_30, parent=None)
-label3 = M5Label('Data Sent', x=21, y=207, color=0x509ed3, font=FONT_MONT_14, parent=None)
-HttpStat = M5Label('200', x=255, y=207, color=0x509ed3, font=FONT_MONT_14, parent=None)
+temperature_label = M5Label('TEMP', x=229, y=129, color=0x509ed3, font=FONT_MONT_30, parent=None)
+ps = M5Label('Waiting', x=21, y=207, color=0x509ed3, font=FONT_MONT_14, parent=None)
+HttpStat = M5Label('Status', x=255, y=207, color=0x509ed3, font=FONT_MONT_14, parent=None)
 touch_button0 = M5Btn(text='Button', x=35, y=61, w=35, h=35, bg_c=0xFFFFFF, text_c=0x000000, font=FONT_MONT_14, parent=None)
 touch_button1 = M5Btn(text='Button', x=142, y=61, w=32, h=32, bg_c=0xFFFFFF, text_c=0x000000, font=FONT_MONT_14, parent=None)
 touch_button2 = M5Btn(text='Button', x=263, y=46, w=15, h=50, bg_c=0xFFFFFF, text_c=0x000000, font=FONT_MONT_14, parent=None)
@@ -56,6 +56,8 @@ def SendPOST():
 
 
 def touch_button0_pressed():
+  ps.set_text('Waiting')
+  HttpStat.set_text('Status')
   global hr, temperature, status, spo2, json_data, DataMap
   hr = heart4.getHeartRate()
   spo2 = heart4.getSpO2()
@@ -71,6 +73,8 @@ def touch_button0_pressed():
 touch_button0.pressed(touch_button0_pressed)
 
 def touch_button1_pressed():
+  ps.set_text('Waiting')
+  HttpStat.set_text('Status')
   global hr, temperature, status, spo2, json_data, DataMap
   hr = heart4.getHeartRate()
   spo2 = heart4.getSpO2()
@@ -86,6 +90,8 @@ def touch_button1_pressed():
 touch_button1.pressed(touch_button1_pressed)
 
 def touch_button2_pressed():
+  ps.set_text('Waiting')
+  HttpStat.set_text('Status')
   global hr, temperature, status, spo2, json_data, DataMap
   temperature = ncir2.temperature
   wait(0.2)
